@@ -1,9 +1,10 @@
-Markers Task <br>
-<br>
-database parameters:<br>
-db_name = mybatis<br>
-table_name = features<br>
-table_columns:<br>
-  id INT(11) (auto increment)<br>
-  coords BLOB<br>
-  PRIMARY (id)<br>
+Markers Task
+
+database parameters:
+
+    db_name = mybatis
+    table_name = features
+    table_columns:
+        id INT(11) (auto increment)
+        coords BLOB
+        PRIMARY (id)
