@@ -29,7 +29,7 @@
             <option selected="selected" value="Point">Point</option>
             <option value="LineString">LineString</option>
             <option value="Polygon">Polygon</option>
-            <option value="None">None</option>
+            <option value="None">None (Edit Mode)</option>
         </select>
 
         <label style="padding-left:5em">Maps: </label>
