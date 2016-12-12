@@ -51,5 +51,13 @@ public class FeatureDAO {
         return queryResult;
     }
 
+    public Integer selectLastId() {
+        SqlSession sqlSession = MySqlSessionFactory.getSqlSessionFactory().openSession();
+        FeatureMapper mapper = sqlSession.getMapper(FeatureMapper.class);
 
+        Integer queryResult = mapper.selectLastId();
+
+        sqlSession.close();
+        return queryResult;
+    }
 }

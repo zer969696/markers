@@ -100,10 +100,8 @@ $(document).ready(function () {
 
     modify.on('modifyend', function (event) {
         event.features.forEach(function (callback) {
-            console.log(callback.getProperties().id);
-
             $.ajax({
-                url: 'Test',
+                url: 'MapServlet',
                 data: {
                     idToUpdate: callback.getProperties().id,
                     coordsToUpdate: new ol.format.WKT().writeFeature(callback),
@@ -126,7 +124,7 @@ $(document).ready(function () {
             var properties = event.selected[0].getProperties();
 
             $.ajax({
-                url: 'Test',
+                url: 'MapServlet',
                 data: {
                     idToDelete: properties.id,
                     type: '1'
@@ -176,7 +174,7 @@ $(document).ready(function () {
                 featureID = featureID + 1;
 
                 $.ajax({
-                    url: 'Test',
+                    url: 'MapServlet',
                     data: {
                         wktCoordinates: new ol.format.WKT().writeFeature(feature),
                         type: '2'
@@ -235,8 +233,23 @@ $(document).ready(function () {
 
     // load all features from DB
     $.ajax({
-        url: 'Test',
+        url: 'MapServlet',
+        data: {
+            type: '10'
+        },
         success: function (responseText) {
+            if (jQuery.isEmptyObject(responseText)) {
+                $.ajax({
+                    url: 'MapServlet',
+                    data: {
+                        type: '20'
+                    },
+                    success: function (responseText) {
+                        featureID = parseInt(responseText - 1);
+                    }
+                });
+            }
+
             var format = new ol.format.WKT();
 
             for (var jsonId in responseText) {

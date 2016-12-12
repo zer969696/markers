@@ -21,6 +21,9 @@ public interface FeatureMapper {
     @Select("SELECT * FROM features")
     List<Feature> selectFeatures();
 
+    @Select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE (TABLE_NAME = 'features')")
+    Integer selectLastId();
+
     @Insert("INSERT INTO features(coords) VALUE(#{featureCoords})")
     void insertFeature(Feature feature);
 

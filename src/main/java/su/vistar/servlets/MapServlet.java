@@ -16,23 +16,38 @@ import java.util.List;
  * Created by benzoback on 10.12.16.
  * markersapp
  */
-@WebServlet("/Test")
+@WebServlet("/MapServlet")
 public class MapServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        FeatureDAO featureDAO = new FeatureDAO();
-        List<Feature> features = featureDAO.select();
+        switch (Integer.parseInt(req.getParameter("type"))) {
+            //selectAll
+            case 10: {
+                FeatureDAO featureDAO = new FeatureDAO();
+                List<Feature> features = featureDAO.select();
 
-        JSONObject jsonString = new JSONObject();
+                JSONObject jsonString = new JSONObject();
 
-        for (Feature feature : features) {
-            jsonString.put(feature.getFeatureId().toString(), feature.getFeatureCoords());
+                for (Feature feature : features) {
+                    jsonString.put(feature.getFeatureId().toString(), feature.getFeatureCoords());
+                }
+
+                resp.setContentType("application/json");
+                resp.getWriter().write(jsonString.toJSONString());
+                break;
+            }
+            //selectLastId
+            case 20: {
+                FeatureDAO featureDAO = new FeatureDAO();
+                Integer lastId = featureDAO.selectLastId();
+
+                resp.setContentType("text/plain");
+                resp.getWriter().write(lastId.toString());
+                break;
+            }
         }
-
-        resp.setContentType("application/json");
-        resp.getWriter().write(jsonString.toJSONString());
     }
 
     @Override
@@ -58,7 +73,7 @@ public class MapServlet extends HttpServlet {
                 featureDAO.insert(feature);
                 break;
             }
-            //ipdate
+            //update
             case 3: {
                 Integer queryId = Integer.parseInt(req.getParameter("idToUpdate"));
                 String queryCoords = req.getParameter("coordsToUpdate");
