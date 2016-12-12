@@ -1,0 +1,5 @@
+.body-background {
+    background-image: url("/images/bg-12-full.jpg");
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}

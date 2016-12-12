@@ -13,13 +13,14 @@ import java.io.InputStream;
  */
 
 
-public class MySqlSessionFactory {
+class MySqlSessionFactory {
 
     private static SqlSessionFactory sqlSessionFactory;
 
     static {
         String resource = "mybatis-config.xml";
         InputStream inputStream;
+
         try {
             inputStream = Resources.getResourceAsStream(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -28,7 +29,7 @@ public class MySqlSessionFactory {
         }
     }
 
-    public static SqlSessionFactory getSqlSessionFactory(){
+    static SqlSessionFactory getSqlSessionFactory(){
         return sqlSessionFactory;
     }
 }

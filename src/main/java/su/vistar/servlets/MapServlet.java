@@ -27,7 +27,6 @@ public class MapServlet extends HttpServlet {
 
         JSONObject jsonString = new JSONObject();
 
-
         for (Feature feature : features) {
             jsonString.put(feature.getFeatureId().toString(), feature.getFeatureCoords());
         }
@@ -38,6 +37,7 @@ public class MapServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         switch (Integer.parseInt(req.getParameter("type"))) {
             //delete
             case 1: {
