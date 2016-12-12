@@ -26,4 +26,7 @@ public interface FeatureMapper {
 
     @Delete("DELETE FROM features WHERE id = #{featureId}")
     void deleteFeature(int featureId);
+
+    @Update("UPDATE features SET coords = #{featureCoords} WHERE id = #{featureId}")
+    void updateFeature(Feature feature);
 }

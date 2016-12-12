@@ -32,6 +32,14 @@ public class FeatureDAO {
         sqlSession.close();
     }
 
+    public void update(Feature feature) {
+        SqlSession sqlSession = MySqlSessionFactory.getSqlSessionFactory().openSession();
+        FeatureMapper mapper = sqlSession.getMapper(FeatureMapper.class);
+
+        mapper.updateFeature(feature);
+        sqlSession.commit();
+        sqlSession.close();
+    }
 
     public List<Feature> select() {
         SqlSession sqlSession = MySqlSessionFactory.getSqlSessionFactory().openSession();

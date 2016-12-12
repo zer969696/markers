@@ -58,6 +58,19 @@ public class MapServlet extends HttpServlet {
                 featureDAO.insert(feature);
                 break;
             }
+            //ipdate
+            case 3: {
+                Integer queryId = Integer.parseInt(req.getParameter("idToUpdate"));
+                String queryCoords = req.getParameter("coordsToUpdate");
+                FeatureDAO featureDAO = new FeatureDAO();
+
+                Feature feature = new Feature();
+                feature.setFeatureId(queryId);
+                feature.setFeatureCoords(queryCoords);
+
+                featureDAO.update(feature);
+                break;
+            }
         }
     }
 }

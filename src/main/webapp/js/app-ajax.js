@@ -14,19 +14,19 @@ $(document).ready(function () {
         new ol.style.Style({
             image: new ol.style.Circle({
                 fill: new ol.style.Fill({
-                    color: '#FF9009'
+                    color: '#CC33FF'
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#FF9009',
+                    color: '#CC33FF',
                     width: 4
                 }),
                 radius: 5
             }),
             fill: new ol.style.Fill({
-                color: 'rgba(255, 144, 9, 0.4)'
+                color: 'rgba(204, 51, 255, 0.2)'
             }),
             stroke: stroke = new ol.style.Stroke({
-                color: '#FF9009',
+                color: '#CC33FF',
                 width: 4
             })
         })
@@ -96,6 +96,22 @@ $(document).ready(function () {
             return ol.events.condition.shiftKeyOnly(event) &&
                 ol.events.condition.singleClick(event);
         }
+    });
+
+    modify.on('modifyend', function (event) {
+        event.features.forEach(function (callback) {
+            console.log(callback.getProperties().id);
+
+            $.ajax({
+                url: 'Test',
+                data: {
+                    idToUpdate: callback.getProperties().id,
+                    coordsToUpdate: new ol.format.WKT().writeFeature(callback),
+                    type: '3'
+                },
+                type: 'post'
+            });
+        })
     });
 
     var select = new ol.interaction.Select({
